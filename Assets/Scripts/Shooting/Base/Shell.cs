@@ -6,6 +6,8 @@ namespace Project
     {
         public ShellData ShellData;
 
+        private float _currentLifetime;
+
         protected virtual void OnUpdate()
         {
             
@@ -13,7 +15,16 @@ namespace Project
 
         private void Update()
         {
+            CheckLifetime();
             OnUpdate();
+        }
+
+        private void CheckLifetime()
+        {
+            _currentLifetime += Time.deltaTime;
+
+            if (_currentLifetime >= ShellData.Lifetime)
+                Destroy(gameObject);
         }
     }
 }

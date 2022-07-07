@@ -8,6 +8,8 @@ namespace Project
         public float ShootRange;
         public float ShootRate;
         public float ReloadRate;
+        public int MaxTurnAmmo;
+        public int MaxTotalAmmo;
         public AudioClip ShootSound;
     }
 }
