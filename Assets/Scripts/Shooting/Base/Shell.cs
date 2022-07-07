@@ -10,21 +10,20 @@ namespace Project
 
         protected virtual void OnUpdate()
         {
-            
-        }
-
-        private void Update()
-        {
             CheckLifetime();
-            OnUpdate();
         }
 
-        private void CheckLifetime()
+        protected virtual void CheckLifetime()
         {
             _currentLifetime += Time.deltaTime;
 
             if (_currentLifetime >= ShellData.Lifetime)
                 Destroy(gameObject);
+        }
+
+        private void Update()
+        {
+            OnUpdate();
         }
     }
 }

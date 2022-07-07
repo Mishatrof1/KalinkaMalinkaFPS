@@ -15,7 +15,7 @@ MonoBehaviour:
   AvailableShells:
   - {fileID: 11400000, guid: 24ea1724cffd40140b762193940b40bd, type: 2}
   ShootRange: 800
-  ShootRate: 0.3
+  ShootRate: 0.1
   ReloadRate: 2
   MaxTurnAmmo: 30
   MaxTotalAmmo: 150

@@ -8,5 +8,11 @@ namespace Project
         {
             transform.position += transform.forward * ShellData.MoveSpeed * Time.deltaTime;
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            print("C");
+            Destroy(gameObject);
+        }
     }
 }

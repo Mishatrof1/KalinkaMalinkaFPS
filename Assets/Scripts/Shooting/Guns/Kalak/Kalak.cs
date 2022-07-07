@@ -95,9 +95,6 @@ namespace Project
 
             _totalAmmo -= _currentAmmo;
 
-            print("TOTAL = " + _totalAmmo);
-            print("CURRENT = " + _currentAmmo);
-
             _canShoot = true;
         }
     }
