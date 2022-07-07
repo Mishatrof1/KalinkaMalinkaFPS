@@ -1,13 +1,10 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Project
 {
     public class DamageObject : MonoBehaviour
     {
         public ShellData ShellData;
-        public DamageEvent OnDamage;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -18,10 +15,7 @@ namespace Project
 
             damageable.Damage(ShellData.Damage);
 
-            OnDamage?.Invoke(ShellData.Damage);
+            Destroy(gameObject);
         }
-
-        [Serializable]
-        public class DamageEvent : UnityEvent<int> { }
     }
 }
