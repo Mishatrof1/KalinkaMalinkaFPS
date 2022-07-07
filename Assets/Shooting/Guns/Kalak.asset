@@ -15,6 +15,6 @@ MonoBehaviour:
   AvailableShells:
   - {fileID: 11400000, guid: 24ea1724cffd40140b762193940b40bd, type: 2}
   ShootRange: 800
-  ShootRate: 0.15
+  ShootRate: 0.1
   ReloadRate: 2
-  ShootSound: {fileID: 8300000, guid: a6d8f1169e23d274fa2b380eee28a0b5, type: 3}
+  ShootSound: {fileID: 8300000, guid: 296e3ea7a86ecea4592bbbc2961c6311, type: 3}
