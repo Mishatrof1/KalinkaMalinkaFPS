@@ -4,14 +4,21 @@ namespace Project
 {
     public class PS : Shell
     {
+        protected override void OnInitialize()
+        {
+            GetComponent<Rigidbody>().velocity = transform.forward * ShellData.MoveSpeed;
+        }
+
         protected override void OnFixedUpdate()
         {
-            transform.position += transform.forward * ShellData.MoveSpeed * Time.deltaTime;
+
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            print("C");
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+                return;
+
             Destroy(gameObject);
         }
     }

@@ -14,6 +14,8 @@ namespace Project
         {
             _currentAmmo = GunData.MaxTurnAmmo;
             _totalAmmo = GunData.MaxTotalAmmo;
+
+            UpdateGun();
         }
 
         protected override void OnUpdate()
@@ -56,6 +58,8 @@ namespace Project
 
             _currentAmmo--;
 
+            UpdateGun();
+
             if (CheckReload())
                 return;
 
@@ -96,6 +100,19 @@ namespace Project
             _totalAmmo -= _currentAmmo;
 
             _canShoot = true;
+
+            UpdateGun();
+        }
+
+        private void UpdateGun()
+        {
+            CurrentGunUpdatedEvent updatedEvent = new CurrentGunUpdatedEvent(
+                GunData.MaxTurnAmmo,
+                _currentAmmo,
+                _totalAmmo
+                );
+
+            EventBus.Instance.Send(updatedEvent);
         }
     }
 }
