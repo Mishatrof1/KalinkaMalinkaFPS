@@ -12,7 +12,10 @@ namespace Project
         {
             CheckLifetime();
         }
-
+        protected virtual void OnFixedUpdate()
+        {
+           
+        }
         protected virtual void CheckLifetime()
         {
             _currentLifetime += Time.deltaTime;
@@ -24,6 +27,11 @@ namespace Project
         private void Update()
         {
             OnUpdate();
+        }
+
+        private void FixedUpdate()
+        {
+            OnFixedUpdate();
         }
     }
 }
