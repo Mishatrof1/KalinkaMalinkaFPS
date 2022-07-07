@@ -1,0 +1,10 @@
+using Project.DependencyInjection;
+using UnityEngine;
+
+namespace Project
+{
+    public class #SCRIPTNAME#
+    {
+        
+    }
+}
