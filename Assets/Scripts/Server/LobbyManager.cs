@@ -19,6 +19,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public Transform ContentObject;
 
+    public List<PlayerItem> playerItemList = new List<PlayerItem>();
+    public PlayerItem playerItemPrefab;
+    public Transform playerItemParent;
+
+    public GameObject PlayBtn;
+    public bool isOneStart;
     private void Start()
     {
         PhotonNetwork.JoinLobby();
@@ -28,7 +34,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (RoomInputName.text.Length < 4) return;
 
-        PhotonNetwork.CreateRoom(RoomInputName.text, new RoomOptions { MaxPlayers = 8 });
+        PhotonNetwork.CreateRoom(RoomInputName.text, new RoomOptions { MaxPlayers = 8, BroadcastPropsChangeToAll = true });
 
     }
 
@@ -37,14 +43,27 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         LobbyPanel.SetActive(false);
         RoomPanel.SetActive(true);
         RoomText.text = "Комната: " + PhotonNetwork.CurrentRoom.Name;
+
+        UpdatePLayerList();
     }
 
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         UpdateRoomList(roomList);
+
     }
 
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        UpdatePLayerList();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        UpdatePLayerList();
+    }
     private void UpdateRoomList(List<RoomInfo> list)
     {
         foreach (var item in roomItemList)
@@ -65,5 +84,58 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void JoinRoom(string roomName)
     {
         PhotonNetwork.JoinRoom(roomName);
+    }
+
+    private void UpdatePLayerList()
+    {
+        foreach (var item in playerItemList)
+        {
+            Destroy(item.gameObject);
+        }
+        playerItemList.Clear();
+
+
+        if (PhotonNetwork.CurrentRoom == null) return;
+
+        foreach (var item in PhotonNetwork.CurrentRoom.Players)
+        {
+            PlayerItem newPlayerItem = Instantiate(playerItemPrefab, playerItemParent);
+            newPlayerItem.SetName(item.Value);
+
+            if(item.Value == PhotonNetwork.LocalPlayer)
+            {
+                newPlayerItem.ApplyChanges();
+            }
+            playerItemList.Add(newPlayerItem);
+        }
+        if (!isOneStart)
+        {
+            if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+            {
+                PlayBtn.gameObject.SetActive(true);
+            }
+            else
+            {
+                PlayBtn.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PlayBtn.gameObject.SetActive(true);
+            }
+            else
+            {
+                PlayBtn.gameObject.SetActive(false);
+            }
+        }
+
+
+    }
+
+    public void OnClickPlayButton()
+    {
+        PhotonNetwork.LoadLevel("Game");
     }
 }
