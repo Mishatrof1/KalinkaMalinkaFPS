@@ -17,4 +17,6 @@ MonoBehaviour:
   ShootRange: 800
   ShootRate: 0.1
   ReloadRate: 2
+  MaxTurnAmmo: 30
+  MaxTotalAmmo: 150
   ShootSound: {fileID: 8300000, guid: 296e3ea7a86ecea4592bbbc2961c6311, type: 3}

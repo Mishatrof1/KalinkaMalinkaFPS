@@ -7,5 +7,6 @@ namespace Project
         public GameObject Prefab;
         public int Damage;
         public float MoveSpeed;
+        public float Lifetime = 6f;
     }
 }
