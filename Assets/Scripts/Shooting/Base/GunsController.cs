@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Project
 {
-    public struct #SCRIPTNAME#
+    public class GunsController : MonoBehaviour
     {
         
     }

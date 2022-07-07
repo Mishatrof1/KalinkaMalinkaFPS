@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Project
 {
     [CreateAssetMenu]
-    public class #SCRIPTNAME# : ScriptableObject
+    public class KalakData : GunData
     {
         
     }
