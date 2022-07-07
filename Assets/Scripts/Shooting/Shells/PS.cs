@@ -4,7 +4,7 @@ namespace Project
 {
     public class PS : Shell
     {
-        protected override void OnUpdate()
+        protected override void OnFixedUpdate()
         {
             transform.position += transform.forward * ShellData.MoveSpeed * Time.deltaTime;
         }
