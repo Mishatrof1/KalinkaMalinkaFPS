@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8536310832594883744}
   - component: {fileID: 8464852567813416895}
   - component: {fileID: 6464543659969574581}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2982274480868445782}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
