@@ -16,4 +16,4 @@ MonoBehaviour:
   MoveSpeed: 3.5
   Health: 100
   Damage: 40
-  AttackDistance: 3
+  AttackDistance: 2.5

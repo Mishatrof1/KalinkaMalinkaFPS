@@ -717,6 +717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 952ff7c57af77dd45976b3e6b4b85adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RefreshOnAwake: 1
   Health: 0
 --- !u!1001 &1635418047894233641
 PrefabInstance:

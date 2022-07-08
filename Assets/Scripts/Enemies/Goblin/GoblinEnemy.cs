@@ -63,9 +63,6 @@ namespace Project.Enemies
 
         private void CheckEnemyState()
         {
-            if (_lastEnemyState == CurrentEnemyState)
-                return;
-
             if (CurrentEnemyState == EnemyState.Death)
                 Die();
             else if (CurrentEnemyState == EnemyState.Move)
