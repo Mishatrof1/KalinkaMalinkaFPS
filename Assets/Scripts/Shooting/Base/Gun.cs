@@ -1,8 +1,9 @@
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 namespace Project
 {
-    public abstract class Gun : MonoBehaviour
+    public abstract class Gun : MonoBehaviourPunCallbacks
     {
         public GunData GunData;
         public Transform ShellSpawnPoint;

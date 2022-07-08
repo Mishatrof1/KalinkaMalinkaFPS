@@ -1,7 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 namespace Project
 {
     public class Kalak : Gun
@@ -52,10 +53,7 @@ namespace Project
                 return;
 
             _canShoot = false;
-
-            Instantiate(GunData.AvailableShells[0].Prefab, ShellSpawnPoint.position, ShellSpawnPoint.rotation);
-            AudioSource.PlayClipAtPoint(GunData.ShootSound, transform.position);
-
+             RPC_Shoot();
             _currentAmmo--;
 
             UpdateGun();
@@ -65,7 +63,13 @@ namespace Project
 
             UpdateShootRate();
         }
+        [PunRPC]
+        public void RPC_Shoot()
+        {
+            PhotonNetwork.Instantiate(GunData.AvailableShells[0].name, ShellSpawnPoint.position, ShellSpawnPoint.rotation);
+            AudioSource.PlayClipAtPoint(GunData.ShootSound, transform.position);
 
+        }
         private bool CheckReload()
         {
             if (_currentAmmo > 0)
