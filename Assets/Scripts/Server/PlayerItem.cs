@@ -14,14 +14,18 @@ namespace Project
         public GameObject LeftArrowBtn;
         public GameObject RightArrowBtn;
 
-        ExitGames.Client.Photon.Hashtable playerProp =
-            new ExitGames.Client.Photon.Hashtable();
+        Hashtable playerProp =
+            new Hashtable();
 
         public Image PlayerAvatar;
         public Sprite[] avatars;
 
         Player player;
-
+        private void Start()
+        {
+            playerProp["playerAvatar"] = 0;
+            PhotonNetwork.SetPlayerCustomProperties(playerProp);
+        }
         public void SetName(Player _player)
         {
             PlayerName.text = _player.NickName;
