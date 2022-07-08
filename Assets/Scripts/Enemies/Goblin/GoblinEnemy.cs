@@ -67,11 +67,10 @@ namespace Project.Enemies
                 return;
 
             if (CurrentEnemyState == EnemyState.Death)
-            {
-
-            }
-
-            if (CurrentEnemyState == EnemyState.Attack)
+                Die();
+            else if (CurrentEnemyState == EnemyState.Move)
+                Move();
+            else if (CurrentEnemyState == EnemyState.Attack)
                 Attack();
         }
 
@@ -90,14 +89,26 @@ namespace Project.Enemies
             return true;
         }
 
+        private void Move()
+        {
+            _animator.SetTrigger("Move");
+        }
+
         private void Attack()
         {
-            if (!CanAttack())
-                return;
+            _animator.SetTrigger("Attack");
+        }
+
+        private void Die()
+        {
+            enabled = false;
+
+            _animator.SetTrigger("Die");
         }
 
         public enum EnemyState
         {
+            None,
             Move,
             Attack,
             Death
