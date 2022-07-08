@@ -21,11 +21,7 @@ namespace Project
         public Sprite[] avatars;
 
         Player player;
-        private void Start()
-        {
-            playerProp["playerAvatar"] = 0;
-            PhotonNetwork.SetPlayerCustomProperties(playerProp);
-        }
+
         public void SetName(Player _player)
         {
             PlayerName.text = _player.NickName;
