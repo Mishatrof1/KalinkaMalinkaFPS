@@ -3,6 +3,7 @@ using UnityEngine;
 
     public class PlayerConfig : MonoBehaviour
     {
-        public GameObject[] Avatars;
+        public SkinnedMeshRenderer SkinnedMeshRenderer;
+        public Mesh[] Avatars;
     }
 

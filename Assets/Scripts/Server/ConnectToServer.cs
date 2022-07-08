@@ -14,7 +14,9 @@ namespace Project
             
             PhotonNetwork.NickName = NicknameField.text;
             Debug.Log("Connecting");
+            PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.ConnectUsingSettings();
+
         }
 
         public override void OnConnectedToMaster()
