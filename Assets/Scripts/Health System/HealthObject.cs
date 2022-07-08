@@ -4,9 +4,15 @@ namespace Project
 {
     public class HealthObject : MonoBehaviour, IDamageable, IFillable
     {
+        public bool RefreshOnAwake = true;
         public int Health;
 
         private int _startHealth;
+
+        public void Refresh()
+        {
+            _startHealth = Health;
+        }
 
         public void Damage(int damage)
         {
@@ -30,7 +36,8 @@ namespace Project
 
         private void Awake()
         {
-            _startHealth = Health;
+            if (RefreshOnAwake)
+                Refresh();
         }
 
         private void CheckDeath()
