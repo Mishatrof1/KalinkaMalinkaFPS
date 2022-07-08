@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using Cinemachine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 
@@ -17,7 +18,7 @@ namespace StarterAssets
     public class ThirdPersonController : MonoBehaviourPunCallbacks
     {
         private PhotonView photonView;
-
+        public CinemachineVirtualCamera camera;
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -97,7 +98,7 @@ namespace StarterAssets
 
         // animation IDs
         private int _animIDSpeed;
-        private int _animIDGrounded;
+        private int _animIDShoot;
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
@@ -113,7 +114,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
+        private bool _isAiming = false;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -167,6 +168,20 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+
+            if (Input.GetMouseButton(1))
+            {
+                _isAiming = true;
+            }
+            else
+            {
+                _isAiming = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                SetWip();
+            }
         }
 
         private void LateUpdate()
@@ -177,11 +192,11 @@ namespace StarterAssets
 
         private void AssignAnimationIDs()
         {
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDGrounded = Animator.StringToHash("Grounded");
+            _animIDSpeed = Animator.StringToHash("X");
+            _animIDShoot = Animator.StringToHash("Wip");
             _animIDJump = Animator.StringToHash("Jump");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            //_animIDFreeFall = Animator.StringToHash("FreeFall");
+            //_animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
 
         private void GroundedCheck()
@@ -195,7 +210,7 @@ namespace StarterAssets
             // update animator if using character
             if (_hasAnimator)
             {
-                _animator.SetBool(_animIDGrounded, Grounded);
+                //_animator.SetBool(_animIDGrounded, Grounded);
             }
         }
 
@@ -219,7 +234,13 @@ namespace StarterAssets
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
-
+        private void SetWip()
+        {
+            if (_hasAnimator)
+            {
+                _animator.SetTrigger(_animIDShoot);
+            }
+        }
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
@@ -256,21 +277,47 @@ namespace StarterAssets
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
-
+            Vector3 mouseWorldPos = Vector3.zero;
             // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            if (_isAiming)
+            {
+                camera.gameObject.SetActive(true);
+                Vector2 screen = new Vector2(Screen.width / 2, Screen.height / 2);
+                Ray ray = Camera.main.ScreenPointToRay(screen);
+                if (Physics.Raycast(ray, out RaycastHit hit, 999f))
+                {
+                    mouseWorldPos = hit.point;
+                }
+                else
+                    mouseWorldPos = ray.GetPoint(500);
 
-            // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is a move input rotate player when the player is moving
+                Vector3 worldAimTarget = mouseWorldPos;
+                worldAimTarget.y = transform.position.y;
+                Vector3 aimDir = (worldAimTarget - transform.position).normalized;
+                transform.forward = Vector3.Lerp(transform.forward, aimDir, Time.deltaTime * 20f);
+            }
+            else
+            {
+                camera.gameObject.SetActive(false);
+            }
+         
             if (_input.move != Vector2.zero)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                    RotationSmoothTime);
 
-                // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+
+                if (!_isAiming)
+                {
+                   
+                    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                        RotationSmoothTime);
+
+                    // rotate to face input direction relative to camera position
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
+
             }
 
 
@@ -283,8 +330,8 @@ namespace StarterAssets
             // update animator if using character
             if (_hasAnimator)
             {
-                _animator.SetFloat(_animIDSpeed, _animationBlend);
-                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+                _animator.SetFloat(_animIDSpeed, _animationBlend / 15);
+               // _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
         }
 
@@ -317,7 +364,7 @@ namespace StarterAssets
                     // update animator if using character
                     if (_hasAnimator)
                     {
-                       // _animator.SetBool(_animIDJump, true);
+                        _animator.SetBool(_animIDJump, true);
                     }
                 }
 
