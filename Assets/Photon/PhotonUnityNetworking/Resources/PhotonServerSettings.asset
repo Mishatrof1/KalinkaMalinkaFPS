@@ -41,6 +41,7 @@ MonoBehaviour:
   - RespawnSpaceship
   - RPC_ShowAvatar
   - RPC_Shoot
+  - RPC_PlayShootSound
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
