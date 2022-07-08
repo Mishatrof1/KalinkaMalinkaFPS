@@ -7,7 +7,7 @@ namespace Project
     {
         public GunData GunData;
         public Transform ShellSpawnPoint;
-
+        public AudioSource AudioSourcePlayer;
         protected virtual void OnInitialize()
         {
 
@@ -28,11 +28,10 @@ namespace Project
             return true;
         }
 
-        protected virtual void Shoot()
-        {
-            
-        }
+        protected abstract bool Aim();
 
+        protected abstract void Shoot();
+        protected abstract void RPC_PlayShootSound();
         private void CheckReload()
         {
 
