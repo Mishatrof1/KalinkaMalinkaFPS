@@ -15,7 +15,7 @@ namespace Project
         {
             _currentAmmo = GunData.MaxTurnAmmo;
             _totalAmmo = GunData.MaxTotalAmmo;
-
+            AudioSourcePlayer = GetComponent<AudioSource>();
             UpdateGun();
         }
 
@@ -46,14 +46,25 @@ namespace Project
         {
             return _canShoot;
         }
-
+        protected override bool Aim()
+        {
+            if (Input.GetMouseButton(1))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         protected override void Shoot()
         {
-            if (!CanShoot())
-                return;
+            if (!Aim()) return;
+            if (!CanShoot()) return;
 
             _canShoot = false;
              RPC_Shoot();
+             RPC_PlayShootSound();
             _currentAmmo--;
 
             UpdateGun();
@@ -64,11 +75,14 @@ namespace Project
             UpdateShootRate();
         }
         [PunRPC]
+        protected override void RPC_PlayShootSound()
+        {
+            AudioSourcePlayer.PlayOneShot(GunData.ShootSound);
+        }
+        [PunRPC]
         public void RPC_Shoot()
         {
             PhotonNetwork.Instantiate(GunData.AvailableShells[0].name, ShellSpawnPoint.position, ShellSpawnPoint.rotation);
-            AudioSource.PlayClipAtPoint(GunData.ShootSound, transform.position);
-
         }
         private bool CheckReload()
         {
@@ -118,5 +132,7 @@ namespace Project
 
             EventBus.Instance.Send(updatedEvent);
         }
+
+      
     }
 }
