@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
+
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -12,8 +14,10 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonController : MonoBehaviourPunCallbacks
     {
+        private PhotonView photonView;
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -125,6 +129,9 @@ namespace StarterAssets
 
         private void Awake()
         {
+            photonView = GetComponent<PhotonView>();
+            if (!photonView.IsMine) return;
+
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -134,6 +141,7 @@ namespace StarterAssets
 
         private void Start()
         {
+            if (!photonView.IsMine) return;
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = true;
@@ -154,7 +162,7 @@ namespace StarterAssets
 
         private void Update()
         {
-        
+            if (!photonView.IsMine) return;
 
             JumpAndGravity();
             GroundedCheck();
@@ -163,6 +171,7 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
+            if (!photonView.IsMine) return;
             CameraRotation();
         }
 
