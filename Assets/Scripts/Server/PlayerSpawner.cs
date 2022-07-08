@@ -19,7 +19,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPC_ShowAvatar(PlayerConfig config)
     {
-        config.SkinnedMeshRenderer.sharedMesh = config.Avatars[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
+        //config.SkinnedMeshRenderer.sharedMesh = config.Avatars[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
     }
 }
 
