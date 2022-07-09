@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.23137257, g: 0.2627451, b: 0.3137255, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -232,14 +232,8 @@ MonoBehaviour:
   RightArrowBtn: {fileID: 6341310335245366718}
   PlayerAvatar: {fileID: 735012859875993461}
   avatars:
-  - {fileID: 21300000, guid: 23cabf385ef94e74daa4ef979a81cd12, type: 3}
-  - {fileID: 21300000, guid: cb8c67727c925ed4a8bb7c37734af995, type: 3}
-  - {fileID: 21300000, guid: 7dfc50bb1d344b54a896db8984773a27, type: 3}
-  - {fileID: 21300000, guid: 83fce65de8c59e24185a01ece13acfda, type: 3}
-  - {fileID: 21300000, guid: 44f0bd43082554845ae1914bc1367616, type: 3}
-  - {fileID: 21300000, guid: 19638581f7b74fd41b07054e090a1b3c, type: 3}
-  - {fileID: 21300000, guid: 7b2dc22d1fe3dc24189b924cf3e56429, type: 3}
-  - {fileID: 21300000, guid: a0c24fc58bdeaea4a8cc43d5aabad3fb, type: 3}
+  - {fileID: 21300000, guid: 6942d3f89b2c0f84fa14d7f949086e6e, type: 3}
+  - {fileID: 21300000, guid: 7a2dffcf889ba0d46bc76728fa3ff293, type: 3}
 --- !u!1 &6341310335245366718
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +433,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 23cabf385ef94e74daa4ef979a81cd12, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6942d3f89b2c0f84fa14d7f949086e6e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
