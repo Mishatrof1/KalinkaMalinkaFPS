@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 namespace Project
@@ -6,7 +7,7 @@ namespace Project
     {
         public void Destroy()
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
