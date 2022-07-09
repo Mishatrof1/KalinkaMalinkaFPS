@@ -89,13 +89,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.85
-  m_Radius: 0.28
+  m_Height: 2.17
+  m_Radius: 0.61
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.4, z: 0}
+  m_Center: {x: 0, y: 1.05, z: 0}
 --- !u!114 &5514468077390689272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   behaviours:
-  - {fileID: 8199719707726017817}
+  - {fileID: 0}
   - {fileID: 4727945287981051559}
   - {fileID: 724881332440018256}
 --- !u!1 &7753037148638023618
@@ -409,6 +409,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8199719706704373003}
+  - component: {fileID: 87162332050521077}
+  - component: {fileID: 1279001110626649270}
   m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
@@ -423,56 +425,21 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8199719706704373002}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.379}
+  m_LocalRotation: {x: -0, y: -0, z: -0.000000014901158, w: 1}
+  m_LocalPosition: {x: 0.003, y: 0.169, z: 1.158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8199719707726017816}
+  m_Father: {fileID: 8489783463350730216}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8199719707726017815
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8199719707726017816}
-  - component: {fileID: 8199719707726017817}
-  - component: {fileID: 886354499387385015}
-  m_Layer: 6
-  m_Name: Kalak
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8199719707726017816
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199719707726017815}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.001, y: 0.576, z: -0.057}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8199719707796355892}
-  - {fileID: 8199719706704373003}
-  m_Father: {fileID: 8687820452220598513}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8199719707726017817
+--- !u!114 &87162332050521077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199719707726017815}
+  m_GameObject: {fileID: 8199719706704373002}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c274f5a6e94b40c45b609e2f5221e441, type: 3}
@@ -480,14 +447,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunData: {fileID: 11400000, guid: fbe78e26dbaa0d04eb50b5a55e666ac1, type: 2}
   ShellSpawnPoint: {fileID: 8199719706704373003}
-  AudioSourcePlayer: {fileID: 0}
---- !u!82 &886354499387385015
+  AudioSourcePlayer: {fileID: 1279001110626649270}
+--- !u!82 &1279001110626649270
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199719707726017815}
+  m_GameObject: {fileID: 8199719706704373002}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -577,6 +544,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &8199719707726017815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8199719707726017816}
+  m_Layer: 6
+  m_Name: Kalak
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8199719707726017816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199719707726017815}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.001, y: 0.576, z: -0.057}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8199719707796355892}
+  m_Father: {fileID: 8687820452220598513}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8199719707796355891
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +800,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177913, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 0.14454277
+      value: 1.7780416
       objectReference: {fileID: 0}
     - target: {fileID: 2070925442191277752, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -1484,7 +1483,11 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 546258999920455745, guid: d94b6c3adedb282409fcb59cb49d45bb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8199719706704373003}
   m_SourcePrefab: {fileID: 100100000, guid: d94b6c3adedb282409fcb59cb49d45bb, type: 3}
 --- !u!95 &7653450369001693704 stripped
 Animator:
@@ -1534,6 +1537,12 @@ MonoBehaviour:
 --- !u!4 &7653450369001693719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1762018173025169342, guid: d94b6c3adedb282409fcb59cb49d45bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8234118055565659561}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8489783463350730216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 546258999920455745, guid: d94b6c3adedb282409fcb59cb49d45bb,
     type: 3}
   m_PrefabInstance: {fileID: 8234118055565659561}
   m_PrefabAsset: {fileID: 0}
