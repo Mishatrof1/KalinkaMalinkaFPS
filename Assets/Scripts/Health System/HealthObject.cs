@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Project
 {
@@ -6,6 +7,7 @@ namespace Project
     {
         public bool RefreshOnAwake = true;
         public int Health;
+        public UnityEvent OnDie;
 
         private int _startHealth;
 
@@ -21,7 +23,7 @@ namespace Project
             if (Health < 0)
                 Health = 0;
 
-            CheckDeath();
+            CheckDie();
         }
 
         public void Fill(int health)
@@ -40,15 +42,15 @@ namespace Project
                 Refresh();
         }
 
-        private void CheckDeath()
+        private void CheckDie()
         {
             if (Health == 0)
-                Death();
+                Die();
         }
 
-        private void Death()
+        private void Die()
         {
-            Destroy(gameObject);
+            OnDie?.Invoke();
         }
     }
 }

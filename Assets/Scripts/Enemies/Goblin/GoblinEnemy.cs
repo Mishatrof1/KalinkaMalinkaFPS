@@ -11,6 +11,7 @@ namespace Project.Enemies
         private NavMeshAgent _navMeshAgent;
         private Animator _animator;
         private HealthObject _healthObject;
+        private GoblinAttack _goblinAttack;
 
         private EnemyState _lastEnemyState;
         private Transform _target;
@@ -20,6 +21,7 @@ namespace Project.Enemies
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
             _healthObject = GetComponentInChildren<HealthObject>();
+            _goblinAttack = GetComponent<GoblinAttack>();
 
             _navMeshAgent.speed = EnemyData.MoveSpeed;
             _healthObject.Health = EnemyData.Health;
@@ -42,14 +44,14 @@ namespace Project.Enemies
 
             while (true)
             {
-                try
-                {
-                    _target = Players.Instance.GetNearestPlayer(transform.position).Transform;
-                }
-                catch { }
+                _target = Players.Instance.GetNearestPlayer(transform.position).Transform;
 
                 if (_target == null)
+                {
                     yield return wait;
+
+                    continue;
+                }
 
                 _navMeshAgent.SetDestination(_target.position);
 

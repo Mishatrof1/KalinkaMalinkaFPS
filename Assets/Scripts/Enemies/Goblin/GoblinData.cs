@@ -8,6 +8,7 @@ namespace Project.Enemies
         public float MoveSpeed;
         public int Health;
         public int Damage;
+        public float AttackDelay;
         public float AttackDistance;
     }
 }
