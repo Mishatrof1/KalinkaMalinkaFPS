@@ -42,7 +42,14 @@ namespace Project.Enemies
 
             while (true)
             {
-                _target = Players.Instance.GetNearestPlayer(transform.position).Transform;
+                try
+                {
+                    _target = Players.Instance.GetNearestPlayer(transform.position).Transform;
+                }
+                catch { }
+
+                if (_target == null)
+                    yield return wait;
 
                 _navMeshAgent.SetDestination(_target.position);
 
@@ -78,6 +85,9 @@ namespace Project.Enemies
 
         private bool CanAttack()
         {
+            if (_target == null)
+                return false;
+
             float distance = Vector3.Distance(transform.position, _target.position);
 
             if (distance > EnemyData.AttackDistance)
@@ -94,6 +104,8 @@ namespace Project.Enemies
         private void Attack()
         {
             _animator.SetTrigger("Attack");
+
+            transform.LookAt(_target);
         }
 
         private void Die()
