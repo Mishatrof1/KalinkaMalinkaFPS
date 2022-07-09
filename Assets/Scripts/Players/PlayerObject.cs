@@ -10,5 +10,10 @@ namespace Project
         {
             Players.Instance.AddPlayerObject(this);
         }
+
+        private void OnDestroy()
+        {
+            Players.Instance.RemovePlayerObject(this);
+        }
     }
 }

@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 12522
+  controlID: 13336
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 12523
+  controlID: 13337
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 12524
+  controlID: 13338
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -194,8 +194,8 @@ MonoBehaviour:
     y: 0
     width: 551
     height: 874
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -235,7 +235,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: f479fcff667bfcfffc98fcffca99fcff4c9efcff28b0fcff08b6fcff16cbfcffbecdfcff36d0fcff488effffc2afffffc6afffffcaafffffceafffff0eb0ffff12b0ffff3eb0ffff42b0ffff4eb0fffff2ecfffff6ecfffffaecfffffeecffff3eedffff42edffff6eedffff72edffff7eedffff08fbffff
+      m_ExpandedIDs: 58d9faff2afffaffae07fbffc836fcff1237fcfff479fcff667bfcfffc98fcffca99fcff4c9efcff28b0fcff08b6fcff16cbfcffbecdfcff36d0fcff488effffc2afffffc6afffffcaafffffceafffff0eb0ffff12b0ffff3eb0ffff42b0ffff4eb0fffff2ecfffff6ecfffffaecfffffeecffff3eedffff42edffff6eedffff72edffff7eedffff08fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -278,8 +278,8 @@ MonoBehaviour:
     y: 0
     width: 1341
     height: 874
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 8}
@@ -546,9 +546,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 212.24445, y: 28.432587, z: 134.90642}
+    m_Target: {x: 269.48834, y: 35.864132, z: 175.19328}
     speed: 2
-    m_Value: {x: -15.486857, y: -3.4064476, z: -9.413163}
+    m_Value: {x: 269.48834, y: 35.864132, z: 175.19328}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -594,13 +594,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.10837443, y: 0.83726686, z: -0.18049581, w: 0.5050022}
+    m_Target: {x: 0.096395425, y: -0.43335828, z: 0.046201475, w: 0.89506745}
     speed: 2
-    m_Value: {x: 0.02460916, y: -0.9704124, z: 0.11164958, w: 0.21267}
+    m_Value: {x: 0.096377514, y: -0.43327776, z: 0.046192892, w: 0.89490116}
   m_Size:
-    m_Target: 10
+    m_Target: 1.1408966
     speed: 2
-    m_Value: 10
+    m_Value: 1.1408966
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -830,22 +830,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Enemies/Goblin
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Enemies/Goblin
+  - Assets/Scenes
   m_LastFoldersGridSize: 96
   m_LastProjectPath: D:\Unity Projects\KalinkaMalinkaFPS
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 00770000
-    m_LastClickedID: 30464
-    m_ExpandedIDs: 0000000040760000427600004476000046760000487600004a760000b476000000ca9a3b
+    m_SelectedIDs: c8760000
+    m_LastClickedID: 30408
+    m_ExpandedIDs: 0000000040760000427600004476000046760000487600004a760000b4760000e476000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: 536
+    m_CachedPref: 151
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
