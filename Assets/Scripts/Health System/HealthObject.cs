@@ -10,6 +10,7 @@ namespace Project
         public UnityEvent OnDie;
 
         private int _startHealth;
+        private bool _isDied;
 
         public void Refresh()
         {
@@ -44,8 +45,15 @@ namespace Project
 
         private void CheckDie()
         {
+            if (_isDied)
+                return;
+
             if (Health == 0)
+            {
+                _isDied = true;
+
                 Die();
+            }
         }
 
         private void Die()

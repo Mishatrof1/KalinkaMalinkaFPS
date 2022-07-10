@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 namespace Project
@@ -5,33 +6,29 @@ namespace Project
     [RequireComponent(typeof(Rigidbody))]
     public class PS : Shell
     {
-        [SerializeField] private Rigidbody Rb;
+        private Rigidbody _rigidbody;
+        private Vector3 _lastPosition;
+
         protected override void OnInitialize()
         {
-            Rb = GetComponent<Rigidbody>();
-            Rb.velocity = transform.forward * ShellData.MoveSpeed;
+            _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody.velocity = transform.forward * ShellData.MoveSpeed;
+            _lastPosition = transform.position;
         }
 
         protected override void OnFixedUpdate()
         {
-            RaycastHit hit;
-
-            if (Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, 0.5f))
+            if (Physics.Linecast(_lastPosition, transform.position, out RaycastHit hit))
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
-                    return;
-                print("усимъ");
-                Destroy(gameObject);
+                IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+
+                if (damageable != null)
+                    damageable.Damage(ShellData.Damage);
+
+                PhotonNetwork.Destroy(gameObject);
             }
-        }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-                return;
-
-            print("MOY");
-            Destroy(gameObject);
+            _lastPosition = transform.position;
         }
     }
 }

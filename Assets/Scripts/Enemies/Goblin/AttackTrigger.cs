@@ -28,9 +28,9 @@ namespace Project
                 return;
             }
 
-            OnTrigger?.Invoke(damageable);
-
             Disable();
+
+            OnTrigger?.Invoke(damageable);
         }
     }
 }

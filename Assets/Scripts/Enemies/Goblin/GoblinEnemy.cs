@@ -6,20 +6,27 @@ namespace Project.Enemies
 {
     public class GoblinEnemy : Enemy<GoblinData>
     {
-        public EnemyState CurrentEnemyState { get; private set; }
+        public EnemyState CurrentEnemyState { get; set; }
 
         private NavMeshAgent _navMeshAgent;
         private Animator _animator;
+        private AudioSource _audioSource;
         private HealthObject _healthObject;
         private GoblinAttack _goblinAttack;
 
         private EnemyState _lastEnemyState;
         private Transform _target;
 
+        public void SetEnemyStateToDeath()
+        {
+            CurrentEnemyState = EnemyState.Death;
+        }
+
         protected override void OnInitialize()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
+            _audioSource = GetComponent<AudioSource>();
             _healthObject = GetComponentInChildren<HealthObject>();
             _goblinAttack = GetComponent<GoblinAttack>();
 
@@ -114,7 +121,14 @@ namespace Project.Enemies
         {
             enabled = false;
 
+            _goblinAttack.enabled = false;
+            _healthObject.enabled = false;
+            _navMeshAgent.enabled = false;
+
+            StopAllCoroutines();
+
             _animator.SetTrigger("Die");
+            _audioSource.PlayOneShot(EnemyData.DeathSounds[Random.Range(0, EnemyData.DeathSounds.Length)]);
         }
 
         public enum EnemyState

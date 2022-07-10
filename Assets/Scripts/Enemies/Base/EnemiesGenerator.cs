@@ -12,6 +12,9 @@ namespace Project.Enemies
         [SerializeField]
         private Transform[] _spawns;
 
+        [SerializeField]
+        private int _enemyCount;
+
         private void Start()
         {
             StartCoroutine(GenerateEnemiesCoroutine());
@@ -21,7 +24,7 @@ namespace Project.Enemies
         {
             yield return new WaitForSeconds(1f);
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < _enemyCount; i++)
             {
                 GenerateEnemy();
 

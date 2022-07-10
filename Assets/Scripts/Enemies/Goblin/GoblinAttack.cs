@@ -12,6 +12,8 @@ namespace Project.Enemies
         [SerializeField]
         private AttackTrigger _attackTrigger;
 
+        private AudioSource _audioSource;
+
         public void TryAttack()
         {
             _attackTrigger.Enable();
@@ -19,6 +21,8 @@ namespace Project.Enemies
 
         private void Awake()
         {
+            _audioSource = GetComponent<AudioSource>();
+
             _attackTrigger.Disable();
 
             _attackTrigger.OnTrigger += OnTrigger;
@@ -27,6 +31,15 @@ namespace Project.Enemies
         private void OnTrigger(IDamageable damageable)
         {
             damageable.Damage(_goblinData.Damage);
+
+            AudioClip sound = GetAttackSound();
+
+            _audioSource.PlayOneShot(sound);
+        }
+
+        private AudioClip GetAttackSound()
+        {
+            return _goblinData.AttackSounds[Random.Range(0, _goblinData.AttackSounds.Length)];
         }
     }
 }
