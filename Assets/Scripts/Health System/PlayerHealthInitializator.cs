@@ -16,10 +16,8 @@ namespace Project
         public HealthPart LeftTopLeg;
         public HealthPart LeftBottomLeg;
 
-        private void Start()
+        public void Refresh()
         {
-            GetComponent<HealthObject>().Refresh();
-
             PlayerHealthRefreshEvent refreshEvent = new PlayerHealthRefreshEvent(
                 Head,
                 Chest,
@@ -34,6 +32,13 @@ namespace Project
                 LeftBottomLeg);
 
             EventBus.Instance.Send(refreshEvent);
+        }
+
+        private void Start()
+        {
+            GetComponent<HealthObject>().Refresh();
+
+            Refresh();
         }
     }
 }

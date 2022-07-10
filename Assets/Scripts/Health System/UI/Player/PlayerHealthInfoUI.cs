@@ -54,21 +54,6 @@ namespace Project
         {
             EventBus.Instance.AddListener<PlayerHealthRefreshEvent>(OnPlayerHealthRefresh);
             EventBus.Instance.AddListener<PlayerHealthChangedEvent>(OnPlayerHealthChanged);
-        }
-
-        private void OnPlayerHealthRefresh(PlayerHealthRefreshEvent e)
-        {
-            _head = e.Head;
-            _chest = e.Chest;
-            _belly = e.Belly;
-            _rightTopHand = e.RightTopHand;
-            _rightBottomHand = e.RightBottomHand;
-            _leftTopHand = e.LeftTopHand;
-            _leftBottomHand = e.LeftBottomHand;
-            _rightTopLeg = e.RightTopLeg;
-            _rightBottomLeg = e.RightBottomLeg;
-            _leftTopLeg = e.LeftTopLeg;
-            _leftBottomLeg = e.LeftBottomLeg;
 
             _headImage.color = Color.white;
             _chestImage.color = Color.white;
@@ -81,6 +66,34 @@ namespace Project
             _rightBottomLegImage.color = Color.white;
             _leftTopLegImage.color = Color.white;
             _leftBottomLegImage.color = Color.white;
+        }
+
+        private void OnPlayerHealthRefresh(PlayerHealthRefreshEvent e)
+        {
+            if (_head == null)
+            {
+                _head = e.Head;
+                _chest = e.Chest;
+                _belly = e.Belly;
+                _rightTopHand = e.RightTopHand;
+                _rightBottomHand = e.RightBottomHand;
+                _leftTopHand = e.LeftTopHand;
+                _leftBottomHand = e.LeftBottomHand;
+                _rightTopLeg = e.RightTopLeg;
+                _rightBottomLeg = e.RightBottomLeg;
+                _leftTopLeg = e.LeftTopLeg;
+                _leftBottomLeg = e.LeftBottomLeg;
+            }
+            else
+            {
+                return;
+                (HealthPart healthPart, Image image) = FindChangedPartAndImage(null);
+                float health = healthPart.Health / healthPart.HealthPartData.Health;
+
+                image.color = Color.Lerp(Color.white, Color.red, 10f * health);
+
+                
+            }
         }
 
         private void OnPlayerHealthChanged(PlayerHealthChangedEvent e)
