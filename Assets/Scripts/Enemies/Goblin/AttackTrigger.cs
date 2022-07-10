@@ -5,7 +5,7 @@ namespace Project
 {
     public class AttackTrigger : MonoBehaviour
     {
-        public event Action<IDamageable> OnTrigger;
+        public event Action<IDamageable, Collider> OnTrigger;
 
         public void Enable()
         {
@@ -30,7 +30,7 @@ namespace Project
 
             Disable();
 
-            OnTrigger?.Invoke(damageable);
+            OnTrigger?.Invoke(damageable, other);
         }
     }
 }

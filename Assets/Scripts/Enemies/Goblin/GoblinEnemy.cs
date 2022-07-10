@@ -17,9 +17,14 @@ namespace Project.Enemies
         private EnemyState _lastEnemyState;
         private Transform _target;
 
-        public void SetEnemyStateToDeath()
+        public void SimulateDeath(DamageEventData eventData)
         {
             CurrentEnemyState = EnemyState.Death;
+
+            Rigidbody rigidbody = eventData.Collider?.GetComponent<Rigidbody>();
+
+            if (rigidbody != null)
+                rigidbody.AddForceAtPosition(eventData.Velocity / 30f, eventData.FromPosition, ForceMode.Impulse);
         }
 
         protected override void OnInitialize()
@@ -31,7 +36,6 @@ namespace Project.Enemies
             _goblinAttack = GetComponent<GoblinAttack>();
 
             _navMeshAgent.speed = EnemyData.MoveSpeed;
-            _healthObject.Health = EnemyData.Health;
 
             _healthObject.Refresh();
 
@@ -127,7 +131,7 @@ namespace Project.Enemies
 
             StopAllCoroutines();
 
-            _animator.SetTrigger("Die");
+            _animator.enabled = false;
             _audioSource.PlayOneShot(EnemyData.DeathSounds[Random.Range(0, EnemyData.DeathSounds.Length)]);
         }
 

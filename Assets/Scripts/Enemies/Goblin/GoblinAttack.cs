@@ -28,9 +28,16 @@ namespace Project.Enemies
             _attackTrigger.OnTrigger += OnTrigger;
         }
 
-        private void OnTrigger(IDamageable damageable)
+        private void OnTrigger(IDamageable damageable, Collider collider)
         {
-            damageable.Damage(_goblinData.Damage);
+            DamageEventData eventData = new DamageEventData(
+                _goblinData.Damage,
+                Vector3.zero,
+                transform.position,
+                collider
+                );
+
+            damageable.Damage(eventData);
 
             AudioClip sound = GetAttackSound();
 

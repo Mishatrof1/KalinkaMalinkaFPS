@@ -13,7 +13,12 @@ namespace Project
             if (damageable == null)
                 return;
 
-            damageable.Damage(ShellData.Damage);
+            DamageEventData eventData = new DamageEventData(ShellData.Damage,
+                Vector3.zero,
+                transform.position,
+                other);
+
+            damageable.Damage(eventData);
 
             Destroy(gameObject);
         }

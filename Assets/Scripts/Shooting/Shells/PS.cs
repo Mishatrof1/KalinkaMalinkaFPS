@@ -8,12 +8,14 @@ namespace Project
     {
         private Rigidbody _rigidbody;
         private Vector3 _lastPosition;
+        private int _layer;
 
         protected override void OnInitialize()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.velocity = transform.forward * ShellData.MoveSpeed;
             _lastPosition = transform.position;
+            _layer = LayerMask.NameToLayer("Health Part");
         }
 
         protected override void OnFixedUpdate()
@@ -23,7 +25,15 @@ namespace Project
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
 
                 if (damageable != null)
-                    damageable.Damage(ShellData.Damage);
+                {
+                    DamageEventData eventData = new DamageEventData(
+                        ShellData.Damage,
+                        _rigidbody.velocity,
+                        _lastPosition,
+                        hit.collider);
+
+                    damageable.Damage(eventData);
+                }
 
                 PhotonNetwork.Destroy(gameObject);
             }

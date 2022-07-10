@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Goblin
   m_EditorClassIdentifier: 
   Name: "\u0413\u043E\u0431\u043B\u0438\u043D"
-  MoveSpeed: 7
+  MoveSpeed: 8
   Health: 100
   Damage: 40
   AttackDistance: 2
