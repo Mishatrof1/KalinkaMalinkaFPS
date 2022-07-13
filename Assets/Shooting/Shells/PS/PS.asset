@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PS
   m_EditorClassIdentifier: 
   Prefab: {fileID: 2982274480868445782, guid: 36522633018209745801b88e491392c4, type: 3}
-  Damage: 10
-  MoveSpeed: 100
+  Damage: 50
+  MoveSpeed: 900
   Lifetime: 6

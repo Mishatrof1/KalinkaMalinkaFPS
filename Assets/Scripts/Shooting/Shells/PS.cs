@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 namespace Project
@@ -5,31 +6,39 @@ namespace Project
     [RequireComponent(typeof(Rigidbody))]
     public class PS : Shell
     {
-        [SerializeField]private Rigidbody Rb;
+        private Rigidbody _rigidbody;
+        private Vector3 _lastPosition;
+        private int _layer;
+
         protected override void OnInitialize()
         {
-            Rb = GetComponent<Rigidbody>();
-            Rb.velocity = transform.forward * ShellData.MoveSpeed;
+            _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody.velocity = transform.forward * ShellData.MoveSpeed;
+            _lastPosition = transform.position;
+            _layer = LayerMask.NameToLayer("Health Part");
         }
 
         protected override void OnFixedUpdate()
         {
-            RaycastHit hit;
-            Debug.DrawLine(transform.position, transform.TransformDirection(transform.forward), Color.red, 0.5f);
-            if (Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit,0.5f))
+            if (Physics.Linecast(_lastPosition, transform.position, out RaycastHit hit))
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player")) return;
+                IDamageable damageable = hit.collider.GetComponent<IDamageable>();
 
-                Destroy(gameObject);
+                if (damageable != null)
+                {
+                    DamageEventData eventData = new DamageEventData(
+                        ShellData.Damage,
+                        _rigidbody.velocity,
+                        _lastPosition,
+                        hit.collider);
+
+                    damageable.Damage(eventData);
+                }
+
+                PhotonNetwork.Destroy(gameObject);
             }
-        }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-                return;
-
-            Destroy(gameObject);
+            _lastPosition = transform.position;
         }
     }
 }

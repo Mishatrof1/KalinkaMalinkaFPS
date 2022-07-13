@@ -1,37 +1,43 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Project
 {
-    public class HealthObject : MonoBehaviour, IDamageable, IFillable
+    public class HealthObject : MonoBehaviour
     {
         public bool RefreshOnAwake = true;
-        public int Health;
+        public DeathEvent OnDie;
 
-        private int _startHealth;
+        private HealthPart[] _healthParts;
 
         public void Refresh()
         {
-            _startHealth = Health;
+            _healthParts = GetComponentsInChildren<HealthPart>();
+
+            for (int i = 0; i < _healthParts.Length; i++)
+                _healthParts[i].Refresh();
         }
 
-        public void Damage(int damage)
+        public void DistributeDamage(DamageEventData eventData)
         {
-            Health -= damage;
+            List<HealthPart> healthParts = GetWholeHealthParts();
+            int averageDamage = (int)(eventData.Damage / 100f * 70f);
 
-            if (Health < 0)
-                Health = 0;
+            if (averageDamage == 0)
+                averageDamage = 1;
 
-            CheckDeath();
+            for (int i = 0; i < healthParts.Count; i++)
+                healthParts[i].DistributedDamage(averageDamage);
+
+            for (int i = 0; i < healthParts.Count; i++)
+                healthParts[i].ReceivedDistributedDamage = false;
         }
 
-        public void Fill(int health)
+        public void Die(DamageEventData eventData)
         {
-            int newHealth = Health + health;
-
-            if (newHealth > _startHealth)
-                newHealth = _startHealth;
-
-            Health = newHealth;
+            OnDie?.Invoke(eventData);
         }
 
         private void Awake()
@@ -40,15 +46,22 @@ namespace Project
                 Refresh();
         }
 
-        private void CheckDeath()
+        private List<HealthPart> GetWholeHealthParts()
         {
-            if (Health == 0)
-                Death();
+            List<HealthPart> healthParts = new List<HealthPart>();
+
+            for (int i = 0; i < _healthParts.Length; i++)
+            {
+                HealthPart healthPart = _healthParts[i];
+
+                if (!healthPart.IsDied)
+                    healthParts.Add(healthPart);
+            }
+
+            return healthParts;
         }
 
-        private void Death()
-        {
-            Destroy(gameObject);
-        }
+        [Serializable]
+        public class DeathEvent : UnityEvent<DamageEventData> { }
     }
 }

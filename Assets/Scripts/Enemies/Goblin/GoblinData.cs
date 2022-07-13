@@ -9,5 +9,7 @@ namespace Project.Enemies
         public int Health;
         public int Damage;
         public float AttackDistance;
+        public AudioClip[] AttackSounds;
+        public AudioClip[] DeathSounds;
     }
 }

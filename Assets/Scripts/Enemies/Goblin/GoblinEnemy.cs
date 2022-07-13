@@ -6,23 +6,36 @@ namespace Project.Enemies
 {
     public class GoblinEnemy : Enemy<GoblinData>
     {
-        public EnemyState CurrentEnemyState { get; private set; }
+        public EnemyState CurrentEnemyState { get; set; }
 
         private NavMeshAgent _navMeshAgent;
         private Animator _animator;
+        private AudioSource _audioSource;
         private HealthObject _healthObject;
+        private GoblinAttack _goblinAttack;
 
         private EnemyState _lastEnemyState;
         private Transform _target;
+
+        public void SimulateDeath(DamageEventData eventData)
+        {
+            CurrentEnemyState = EnemyState.Death;
+
+            Rigidbody rigidbody = eventData.Collider?.GetComponent<Rigidbody>();
+
+            if (rigidbody != null)
+                rigidbody.AddForceAtPosition(eventData.Velocity / 30f, eventData.FromPosition, ForceMode.Impulse);
+        }
 
         protected override void OnInitialize()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
+            _audioSource = GetComponent<AudioSource>();
             _healthObject = GetComponentInChildren<HealthObject>();
+            _goblinAttack = GetComponent<GoblinAttack>();
 
             _navMeshAgent.speed = EnemyData.MoveSpeed;
-            _healthObject.Health = EnemyData.Health;
 
             _healthObject.Refresh();
 
@@ -43,6 +56,13 @@ namespace Project.Enemies
             while (true)
             {
                 _target = Players.Instance.GetNearestPlayer(transform.position).Transform;
+
+                if (_target == null)
+                {
+                    yield return wait;
+
+                    continue;
+                }
 
                 _navMeshAgent.SetDestination(_target.position);
 
@@ -78,6 +98,9 @@ namespace Project.Enemies
 
         private bool CanAttack()
         {
+            if (_target == null)
+                return false;
+
             float distance = Vector3.Distance(transform.position, _target.position);
 
             if (distance > EnemyData.AttackDistance)
@@ -94,13 +117,22 @@ namespace Project.Enemies
         private void Attack()
         {
             _animator.SetTrigger("Attack");
+
+            transform.LookAt(_target);
         }
 
         private void Die()
         {
             enabled = false;
 
-            _animator.SetTrigger("Die");
+            _goblinAttack.enabled = false;
+            _healthObject.enabled = false;
+            _navMeshAgent.enabled = false;
+
+            StopAllCoroutines();
+
+            _animator.enabled = false;
+            _audioSource.PlayOneShot(EnemyData.DeathSounds[Random.Range(0, EnemyData.DeathSounds.Length)]);
         }
 
         public enum EnemyState

@@ -32,8 +32,6 @@ namespace Project
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
             Vector3 target;
 
-            Debug.DrawRay(ray.origin, ray.direction, Color.red);
-
             if (Physics.Raycast(ray, out RaycastHit hit))
                 target = hit.point;
             else

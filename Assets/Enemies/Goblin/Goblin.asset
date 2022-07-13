@@ -12,8 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3abc991bd31058e46ae2f4b1ed0bc492, type: 3}
   m_Name: Goblin
   m_EditorClassIdentifier: 
-  Name: 
-  MoveSpeed: 3.5
+  Name: "\u0413\u043E\u0431\u043B\u0438\u043D"
+  MoveSpeed: 8
   Health: 100
   Damage: 40
-  AttackDistance: 2.5
+  AttackDistance: 2
+  AttackSounds:
+  - {fileID: 8300000, guid: e6697d710154d5349ab2c8d9f06764a7, type: 3}
+  - {fileID: 8300000, guid: b54b33437f3bb214fbdec9ad3d39a792, type: 3}
+  - {fileID: 8300000, guid: dc282fd2e1053a24d9169b6900b986ce, type: 3}
+  - {fileID: 8300000, guid: 062430fb87467904b96345a76df54b16, type: 3}
+  - {fileID: 8300000, guid: 8a1efc60d43ec0043abdcff7abc7110b, type: 3}
+  - {fileID: 8300000, guid: 6a53c5cdf6907634687c5c93a11ec7e7, type: 3}
+  DeathSounds:
+  - {fileID: 8300000, guid: 2a42af70bbbca104496fd3202304db54, type: 3}
+  - {fileID: 8300000, guid: e2fb2022f989b4d41867596d338c7739, type: 3}
+  - {fileID: 8300000, guid: 0cbecddf4f72f1a4a922a933e05831cd, type: 3}
+  - {fileID: 8300000, guid: d240a97ef92c3524d8043f0871e73a1f, type: 3}
