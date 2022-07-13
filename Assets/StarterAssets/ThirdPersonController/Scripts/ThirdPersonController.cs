@@ -101,7 +101,7 @@ namespace StarterAssets
         private int _animIDShoot;
         private int _animIDJump;
         private int _animIDFreeFall;
-        private int _animIDMotionSpeed;
+        private int _animIDRotator;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -168,7 +168,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-
+            CameraRotation();
             if (Input.GetMouseButton(1))
             {
                 _isAiming = true;
@@ -186,8 +186,8 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            if (!photonView.IsMine) return;
-            CameraRotation();
+            //if (!photonView.IsMine) return;
+            //CameraRotation();
         }
 
         private void AssignAnimationIDs()
@@ -195,6 +195,7 @@ namespace StarterAssets
             _animIDSpeed = Animator.StringToHash("X");
             _animIDShoot = Animator.StringToHash("Wip");
             _animIDJump = Animator.StringToHash("Jump");
+            _animIDRotator = Animator.StringToHash("Y");
             //_animIDFreeFall = Animator.StringToHash("FreeFall");
             //_animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
@@ -229,7 +230,12 @@ namespace StarterAssets
             // clamp our rotations so our values are limited 360 degrees
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
             _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
+            if(_isAiming)
+                _animator.SetFloat(_animIDRotator, _cinemachineTargetPitch);
+            else
+            {
+                _animator.SetFloat(_animIDRotator, 0);
+            }
             // Cinemachine will follow this target
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
