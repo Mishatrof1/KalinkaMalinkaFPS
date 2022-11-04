@@ -10,23 +10,24 @@ namespace Project
         private bool _canShoot = true;
         private int _currentAmmo;
         private int _totalAmmo;
-
+        private Quaternion IdentityRot;
         protected override void OnInitialize()
         {
             _currentAmmo = GunData.MaxTurnAmmo;
             _totalAmmo = GunData.MaxTotalAmmo;
             AudioSourcePlayer = GetComponent<AudioSource>();
+            IdentityRot = transform.localRotation;
             UpdateGun();
         }
-
+       
         protected override void OnUpdate()
         {
-            LookToTarget();
+                LookToTarget();
 
             if (Input.GetMouseButton(0))
                 Shoot();
         }
-
+        
         protected override void LookToTarget()
         {
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -64,7 +65,6 @@ namespace Project
              RPC_Shoot();
              RPC_PlayShootSound();
             _currentAmmo--;
-
             UpdateGun();
 
             if (CheckReload())
@@ -82,6 +82,8 @@ namespace Project
         {
             PhotonNetwork.Instantiate(GunData.AvailableShells[0].name, ShellSpawnPoint.position, ShellSpawnPoint.rotation);
         }
+
+     
         private bool CheckReload()
         {
             if (_currentAmmo > 0)

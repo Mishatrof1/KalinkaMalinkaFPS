@@ -108,25 +108,25 @@ namespace Project
         {
             if (changedPart == _head)
                 return (_head, _headImage);
-            else if (changedPart == _chest)
+            if (changedPart == _chest)
                 return (_chest, _chestImage);
-            else if (changedPart == _belly)
+            if (changedPart == _belly)
                 return (_belly, _bellyImage);
-            else if (changedPart == _rightTopHand)
+            if (changedPart == _rightTopHand)
                 return (_rightTopHand, _rightTopHandImage);
-            else if (changedPart == _rightBottomHand)
+            if (changedPart == _rightBottomHand)
                 return (_rightBottomHand, _rightBottomHandImage);
-            else if (changedPart == _leftTopHand)
+            if (changedPart == _leftTopHand)
                 return (_leftTopHand, _leftTopHandImage);
-            else if (changedPart == _leftBottomHand)
+            if (changedPart == _leftBottomHand)
                 return (_leftBottomHand, _leftBottomHandImage);
-            else if (changedPart == _rightTopLeg)
+            if (changedPart == _rightTopLeg)
                 return (_rightTopLeg, _rightTopLegImage);
-            else if (changedPart == _rightBottomLeg)
+            if (changedPart == _rightBottomLeg)
                 return (_rightBottomLeg, _rightBottomLegImage);
-            else if (changedPart == _leftTopLeg)
+            if (changedPart == _leftTopLeg)
                 return (_leftTopLeg, _leftTopLegImage);
-            else if (changedPart == _leftBottomLeg)
+            if (changedPart == _leftBottomLeg)
                 return (_leftBottomLeg, _leftBottomLegImage);
             else
                 throw new System.Exception("Changed health part was not found.");
