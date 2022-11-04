@@ -6,48 +6,43 @@ namespace Project
 {
     public class RecoilSystem : MonoBehaviour
     {
-        public float recoilTime = 0.1f;
-        public float recoilIntens = 10.0f;
-        public float spreadAngle = 30.0f;
-        public Transform Obj;
-        void Update()
+        private Vector3 currentRotation;
+        private Vector3 targerRotation;
+
+        [SerializeField]
+        private float recoinlX;
+        [SerializeField]
+        private float recoinlY;
+        [SerializeField]
+        private float recoinlZ;
+
+        [SerializeField] private float snapiness;
+        [SerializeField] private float returnSeed;
+
+
+        [SerializeField] private CinemachineRecomposer CinemachineRecomposer;
+
+        private void Start()
         {
-            if (Input.GetMouseButton(0))
-            {
-                StartCoroutine(Recoil());
-            }
+            
         }
 
-        IEnumerator Recoil()
+        private void Update()
         {
-            Vector3 vLook = Vector3.zero;
+            targerRotation = Vector3.Lerp(targerRotation, Vector3.zero, returnSeed * Time.deltaTime);
+            currentRotation = Vector3.Slerp(currentRotation, targerRotation, snapiness * Time.fixedDeltaTime);
+            //transform.localRotation = Quaternion.Euler(currentRotation);
+            CinemachineRecomposer.m_Pan = currentRotation.y;
+            CinemachineRecomposer.m_Tilt = currentRotation.x;
 
-            Vector3 vSpread = Quaternion.AngleAxis(Random.Range(-spreadAngle, +spreadAngle), Obj.transform.forward) * Obj.transform.up;
+            if (Input.GetMouseButton(0))
+                RecoilFire();
+        }
 
-            Vector3 vRight = Vector3.Cross(Obj.transform.forward, vSpread);
-
-            float elapsedTime = 0.0f;
-
-            while (true)
-            {
-                elapsedTime += Time.deltaTime;
-
-                if (elapsedTime > recoilTime)
-                {
-                    if (elapsedTime > recoilTime * 2)
-                    {
-                        yield break;
-                    }
-
-                    vLook = Quaternion.AngleAxis(recoilIntens * Time.deltaTime, -vRight) * Obj.transform.forward;
-                }
-                else
-                    vLook = Quaternion.AngleAxis(recoilIntens * Time.deltaTime, vRight) * Obj.transform.forward;
-
-                Obj.transform.rotation = Quaternion.LookRotation(vLook);
-
-                yield return null;
-            }
+        public void RecoilFire()
+        {
+            targerRotation += new Vector3(recoinlX, Random.Range(-recoinlY, recoinlY), Random.Range(-recoinlZ, recoinlZ));
+           
         }
     }
 }
