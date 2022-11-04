@@ -114,9 +114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 3875415026670215467}
-  MoveSpeed: 15
-  SprintSpeed: 20
-  RotationSmoothTime: 0.12
+  MoveSpeed: 7
+  SprintSpeed: 15
+  RotationSmoothTime: 0.08
   SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
   FootstepAudioClips:
@@ -911,7 +911,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177913, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7783133
+      value: 1.7768595
       objectReference: {fileID: 0}
     - target: {fileID: 2070925442191277752, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -1642,9 +1642,14 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: Wip
+  - Type: 1
+    SynchronizeType: 0
+    Name: Y
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
+  - SynchronizeType: 0
+    LayerIndex: 1
 --- !u!4 &7653450369001693719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1762018173025169342, guid: d94b6c3adedb282409fcb59cb49d45bb,

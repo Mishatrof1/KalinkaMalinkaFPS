@@ -82,6 +82,7 @@ namespace StarterAssets
 
         // cinemachine
         private float _cinemachineTargetYaw;
+
         private float _cinemachineTargetPitch;
 
         // player
@@ -111,7 +112,7 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
-        private const float _threshold = 0.01f;
+        private const float _threshold = 0.00001f;
 
         private bool _hasAnimator;
         private bool _isAiming = false;
